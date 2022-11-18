@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Coffee Shop Specs App</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="heading">
+        <h1>Coffee Shop ☕ Specs</h1>
+        <div class="heading-buttons">
+        <a class="anchor-top" href="{{ url_for('home') }}">Home</a>
+        <a class="anchor-top" href="{{ url_for('register') }}">Register</a>
+        </div>
+    </div>
+
+    <div class="parent">
+        <div class="child-main">
+            <span>Login</span>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+           <p>{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <div>
+        <form method="POST" action="{{ url_for('login') }}">
+        {{ form.csrf_token }}
+        <div class="form-label">{{form.username.label(class_="form-row1")}} {{form.username(class_="form-input form-row2")}}</div>
+        <div class="form-label">{{form.password.label(class_="form-row1")}} {{form.password(class_="form-input form-row2")}}</div>
+        <div class="form-label">{{form.submit(class_="form-submit form-row2")}}</div>
+        </form>
+      </div>
+</body>
+
+</html>

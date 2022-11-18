@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Coffee Shop Specs App</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="heading">
+        <h1>Coffee Shop ☕ Specs</h1>
+        <div class="heading-buttons">
+            {% if current_user.is_authenticated: %}
+            <a class="anchor-top" href="{{ url_for('logout') }}">Logout</a>
+            <a class="anchor-top" href="{{ url_for('add') }}">Add</a>
+            {% else: %}
+            <a class="anchor-top" href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% for cafe in cafe_list %}
+    <div class="parent">
+
+        <a class="child-main" href="{{ url_for('details', cafe_id=cafe.id) }}">
+            <span>{{cafe.name}}</span>
+        </a>
+
+
+        <div class="child">
+            {% set wifi = "✖️" %}
+            {% set sockets = "✖️" %}
+            {% set toilets = "✖️" %}
+
+            {% if cafe.has_wifi %}
+            {% set wifi = "✔️" %}
+            {% endif %}
+
+            {% if cafe.has_sockets %}
+            {% set sockets = "✔️" %}
+            {% endif %}
+
+            {% if cafe.has_toilet %}
+            {% set toilets = "✔️" %}
+            {% endif %}
+
+            {% if cafe.can_take_calls %}
+            {% set calls = "✔️" %}
+            {% endif %}
+
+            <span class="col-1">Has Wi-Fi: {{wifi}}</span>
+            <span class="col-2">Has Sockets: {{sockets}}</span>
+            <span class="col-3">Has Toilets: {{toilets}}</span>
+            <span class="col-4">Allowed to Take Calls: {{calls}}</span>
+        </div>
+
+        <div class="child">
+            <span class="col-5">No of seats: {{cafe.seats}}</span>
+            <span class="col-6">Coffee Price: {{cafe.coffee_price}}</span>
+            <span class="col-7">Location: {{cafe.location}}</span>
+        </div>
+
+    </div>
+    <br>
+    {% endfor %}
+</body>
+
+</html>

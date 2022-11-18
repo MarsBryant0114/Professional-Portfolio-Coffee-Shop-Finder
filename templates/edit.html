@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Coffee Shop Specs App</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="heading">
+        <h1>Coffee Shop ☕ Specs</h1>
+        <div class="heading-buttons">
+        <a class="anchor-top" href="{{ url_for('home') }}">Home</a>
+        </div>
+    </div>
+
+    <div class="parent">
+        <div class="child-main">
+            <span>{{cafe.name}}</span>
+        </div>
+    </div>
+    <div>
+        <form method="POST" action="{{ url_for('edit', cafe_id=cafe.id) }}">
+        {{ form.csrf_token }}
+        <div class="form-label">{{form.name.label(class_="form-row1")}}
+            {{form.name(class_="form-input form-row2")}}</div>
+        <div class="form-label">{{form.map_url.label(class_="form-row1")}}
+            {{form.map_url(class_="form-input form-row2")}}</div>
+        <div class="form-label">{{form.img_url.label(class_="form-row1")}}
+            {{form.img_url(class_="form-input form-row2")}}</div>
+        <div class="form-label">{{form.location.label(class_="form-row1")}}
+            {{form.location(class_="form-input form-row2")}}</div>
+        <div class="form-label">{{form.has_sockets.label(class_="form-row1")}}
+            {{form.has_sockets(class_="form-check form-row3")}}</div>
+        <div class="form-label">{{form.has_toilet.label(class_="form-row1")}}
+            {{form.has_toilet(class_="form-check form-row3")}}</div>
+        <div class="form-label">{{form.has_wifi.label(class_="form-row1")}}
+            {{form.has_wifi(class_="form-check form-row3")}}</div>
+        <div class="form-label">{{form.can_take_calls.label(class_="form-row1")}}
+            {{form.can_take_calls(class_="form-check form-row3")}}</div>
+        <div class="form-label">{{form.seats.label(class_="form-row1")}}
+            {{form.seats(class_="form-input form-row2")}}</div>
+        <div class="form-label">{{form.coffee_price.label(class_="form-row1")}}
+            {{form.coffee_price(class_="form-input form-row2")}}</div>
+        <div class="form-label">{{form.submit(class_="form-submit form-row2")}}</div>
+        </form>
+    </div>
+</body>
+
+</html>
